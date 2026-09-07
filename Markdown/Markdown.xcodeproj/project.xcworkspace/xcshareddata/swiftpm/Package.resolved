@@ -1,0 +1,24 @@
+{
+  "originHash" : "3a6599b3d974485ebee95838ce251e8ca293f5fc8539607ddc8e4c1444f14697",
+  "pins" : [
+    {
+      "identity" : "markdownview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/keitaoouchi/MarkdownView.git",
+      "state" : {
+        "revision" : "e076836c247dc18a84a368eb36fb513017e7a519",
+        "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit.git",
+      "state" : {
+        "revision" : "e27a338a03a5f388de759da63f9baf7988ed9e00",
+        "version" : "6.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
