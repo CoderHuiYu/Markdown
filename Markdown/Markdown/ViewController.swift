@@ -24,7 +24,7 @@ final class ViewController: UIViewController {
     private lazy var markdownView: MarkdownView = {
         let markdownView = MarkdownView(
             css: Self.readerCSS,
-            plugins: nil,
+            plugins: [MarkdownTaskListPlugin.javascript],
             styled: true
         )
         markdownView.backgroundColor = .systemBackground
@@ -120,6 +120,7 @@ final class ViewController: UIViewController {
         --reader-secondary: #F2F2F7;
         --reader-muted: #636366;
         --reader-border: #D1D1D6;
+        --reader-control-border: #8E8E93;
         --reader-link: #007AFF;
         --reader-code: #F2F2F7;
         --reader-font: "PingFang SC", "Hiragino Sans", -apple-system, sans-serif;
@@ -190,6 +191,62 @@ final class ViewController: UIViewController {
 
     li + li {
         margin-top: 7px;
+    }
+
+    .task-list-item {
+        list-style: none;
+    }
+
+    .task-list-control {
+        display: inline-flex;
+        width: 44px;
+        height: 44px;
+        margin: -10px 2px -10px -12px;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .task-list-item-checkbox {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+    }
+
+    .task-list-box {
+        position: relative;
+        box-sizing: border-box;
+        width: 22px;
+        height: 22px;
+        border: 2px solid var(--reader-control-border);
+        border-radius: 6px;
+        background: var(--reader-background);
+    }
+
+    .task-list-item-checkbox:checked + .task-list-box {
+        border-color: var(--reader-link);
+        background: var(--reader-link);
+    }
+
+    .task-list-item-checkbox:checked + .task-list-box::after {
+        position: absolute;
+        top: 2px;
+        left: 6px;
+        width: 5px;
+        height: 10px;
+        border: solid var(--reader-background);
+        border-width: 0 2px 2px 0;
+        content: "";
+        transform: rotate(45deg);
+    }
+
+    .task-list-item-checkbox:focus-visible + .task-list-box {
+        outline: 2px solid var(--reader-link);
+        outline-offset: 3px;
     }
 
     blockquote {
@@ -278,6 +335,7 @@ final class ViewController: UIViewController {
             --reader-secondary: #1C1C1E;
             --reader-muted: #AEAEB2;
             --reader-border: #38383A;
+            --reader-control-border: #8E8E93;
             --reader-link: #64D2FF;
             --reader-code: #1C1C1E;
         }
