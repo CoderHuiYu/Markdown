@@ -70,7 +70,11 @@ enum MarkdownTaskListPlugin {
                     '<input class="task-list-item-checkbox" type="checkbox" ' +
                     'data-task-key="' + taskKey + '" aria-label="切换待办完成状态" ' +
                     (checked ? 'checked>' : '>') +
-                    '<span class="task-list-box" aria-hidden="true"></span>' +
+                    '<span class="task-list-box" aria-hidden="true">' +
+                    '<svg class="task-list-check" viewBox="0 0 20 20" aria-hidden="true">' +
+                    '<path d="M4.8 10.5 L8.6 14.0 L15.2 6.0"/>' +
+                    '</svg>' +
+                    '</span>' +
                     '</label>';
 
                 firstChild.content = firstChild.content.slice(marker[0].length);
