@@ -1,15 +1,6 @@
 {
-  "originHash" : "3a6599b3d974485ebee95838ce251e8ca293f5fc8539607ddc8e4c1444f14697",
+  "originHash" : "7836c4fe6a17b73b4571696012b7d75cadb35a72d462b932fbca08ae5be27ade",
   "pins" : [
-    {
-      "identity" : "markdownview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/keitaoouchi/MarkdownView.git",
-      "state" : {
-        "revision" : "e076836c247dc18a84a368eb36fb513017e7a519",
-        "version" : "2.1.0"
-      }
-    },
     {
       "identity" : "snapkit",
       "kind" : "remoteSourceControl",
