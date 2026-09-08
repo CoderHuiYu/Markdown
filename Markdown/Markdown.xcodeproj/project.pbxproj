@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84432CB2304EA66D007C378E /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 84432CB1304EA66D007C378E /* MarkdownView */; };
-		84432CB5304EB000007C378E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84432CB4304EB000007C378E /* SnapKit */; };
+		84432CB2304EA66D007C378E /* MarkdownEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 84432CB1304EA66D007C378E /* MarkdownEditor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84432CB2304EA66D007C378E /* MarkdownView in Frameworks */,
-				84432CB5304EB000007C378E /* SnapKit in Frameworks */,
+				84432CB2304EA66D007C378E /* MarkdownEditor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,8 +83,7 @@
 			);
 			name = Markdown;
 			packageProductDependencies = (
-				84432CB1304EA66D007C378E /* MarkdownView */,
-				84432CB4304EB000007C378E /* SnapKit */,
+				84432CB1304EA66D007C378E /* MarkdownEditor */,
 			);
 			productName = Markdown;
 			productReference = 84432C98304EA3E4007C378E /* Markdown.app */;
@@ -117,8 +114,7 @@
 			mainGroup = 84432C8F304EA3E4007C378E;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				84432CB0304EA66D007C378E /* XCLocalSwiftPackageReference "../Packages/MarkdownView" */,
-				84432CB3304EB000007C378E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				84432CB0304EA66D007C378E /* XCLocalSwiftPackageReference ".." */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 84432C99304EA3E4007C378E /* Products */;
@@ -158,12 +154,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HUW3H8NBU9;
+				DEVELOPMENT_TEAM = 6Q4CZ78R7G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Markdown/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15;
@@ -189,14 +184,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HUW3H8NBU9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Markdown/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15;
@@ -207,6 +201,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.markdown.Markdown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -362,33 +357,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		84432CB0304EA66D007C378E /* XCLocalSwiftPackageReference "../Packages/MarkdownView" */ = {
+		84432CB0304EA66D007C378E /* XCLocalSwiftPackageReference ".." */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Packages/MarkdownView;
+			relativePath = ..;
 		};
 /* End XCLocalSwiftPackageReference section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		84432CB3304EB000007C378E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		84432CB1304EA66D007C378E /* MarkdownView */ = {
+		84432CB1304EA66D007C378E /* MarkdownEditor */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84432CB0304EA66D007C378E /* XCLocalSwiftPackageReference "../Packages/MarkdownView" */;
-			productName = MarkdownView;
-		};
-		84432CB4304EB000007C378E /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 84432CB3304EB000007C378E /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
+			package = 84432CB0304EA66D007C378E /* XCLocalSwiftPackageReference ".." */;
+			productName = MarkdownEditor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

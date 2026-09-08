@@ -1,0 +1,124 @@
+:root {
+    color-scheme: light dark;
+    --md-bg: #ffffff;
+    --md-text: #000000;
+    --md-formatting-inset: 0px;
+    --md-content-top-inset: 24px;
+    --md-content-leading-inset: 20px;
+    --md-content-bottom-inset: 56px;
+    --md-content-trailing-inset: 20px;
+}
+
+:root.md-dark {
+    --md-bg: #000000;
+    --md-text: #ffffff;
+}
+
+html,
+body,
+#editor-shell,
+#editor,
+.vditor,
+.vditor-content,
+.vditor-wysiwyg {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: var(--md-bg);
+}
+
+#editor-shell {
+    box-sizing: border-box;
+}
+
+.vditor {
+    border: 0;
+    border-radius: 0;
+    background: var(--md-bg);
+}
+
+.vditor-toolbar,
+.vditor-resize,
+.vditor-counter,
+.vditor-outline,
+.vditor-panel,
+.vditor-tip {
+    display: none !important;
+}
+
+.vditor-content {
+    overflow: hidden;
+    background: var(--md-bg);
+}
+
+.vditor-wysiwyg {
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: var(--md-bg);
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+.vditor-reset {
+    box-sizing: border-box;
+    min-height: 100%;
+    padding-bottom: calc(
+        var(--md-content-bottom-inset)
+        + var(--md-formatting-inset)
+        + env(safe-area-inset-bottom)
+    );
+    caret-color: #007aff;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.md-read-only .vditor-reset {
+    caret-color: transparent;
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+/* Vditor treats disabled as a form-control state and dims it to 30%.
+   Here disabled means reading mode, so the document must keep full contrast. */
+.md-read-only .vditor-wysiwyg pre.vditor-reset[contenteditable="false"] {
+    opacity: 1;
+    cursor: text;
+}
+
+.md-tasks-locked li.vditor-task > input[type="checkbox"] {
+    pointer-events: none;
+}
+
+/* WYSIWYG keeps unsupported inline HTML in the document model. A Markdown
+   <br> remains serialized as authored, while presenting as a real line break. */
+.vditor-wysiwyg code[data-type="html-inline"].md-inline-break {
+    display: block;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    color: transparent;
+    background: transparent;
+    font-size: 0;
+    line-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}

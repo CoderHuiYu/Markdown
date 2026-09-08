@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-08T21:00:00+08:00",
+  "title": "Design System: MarkdownEditor",
+  "extensions": {
+    "colorMeta": {
+      "task-green": {
+        "role": "primary",
+        "displayName": "Task Green",
+        "canonical": "#01bc4a",
+        "tonalRamp": ["#003d17", "#006626", "#008f36", "#01bc4a", "#42cf72", "#7de29c", "#b9f2cb", "#edfff3"]
+      },
+      "ios-link": {
+        "role": "primary",
+        "displayName": "iOS Link Blue",
+        "canonical": "#007aff",
+        "tonalRamp": ["#001f4d", "#003d80", "#005bb5", "#007aff", "#3d9bff", "#79baff", "#b5d9ff", "#eef7ff"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#000000",
+        "tonalRamp": ["#000000", "#1c1c1e", "#3a3a3c", "#636366", "#8e8e93", "#aeaeb2", "#d1d1d6", "#f2f2f7"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#1c1c1e", "#3a3a3c", "#636366", "#8e8e93", "#aeaeb2", "#d1d1d6", "#f2f2f7", "#ffffff"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Document Display",
+        "purpose": "Level-one document titles and major note boundaries."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Level-two sections with the primary heading wash."
+      },
+      "body": {
+        "displayName": "Chinese Note Body",
+        "purpose": "Long-form note content, lists, quotations, and tasks."
+      },
+      "control": {
+        "displayName": "Native Control",
+        "purpose": "Formatting actions and completion."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "task-confirm",
+        "value": "0.45s cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "One size pulse when a task becomes checked."
+      },
+      {
+        "name": "formatting-bar-visibility",
+        "value": "0.18s ease-out",
+        "purpose": "Reveal or hide the keyboard-adjacent formatting surface."
+      }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Section Heading",
+      "kind": "custom",
+      "description": "A bold heading with a restrained wash that follows the text width.",
+      "html": "<h2 class=\"ds-section-heading\">会议背景</h2>",
+      "css": ".ds-section-heading { position: relative; display: table; margin: 28px 0 7px; color: #000; font: 700 23px/1.18 \"PingFang SC\", sans-serif; } .ds-section-heading::after { position: absolute; z-index: -1; right: 0; bottom: -1px; left: 0; height: 9px; border-radius: 4px; background: linear-gradient(90deg, rgba(118,123,255,.30), rgba(189,124,255,0)); content: \"\"; }"
+    },
+    {
+      "name": "Formatting Control",
+      "kind": "button",
+      "refersTo": "formatting-control",
+      "description": "An unselected 44-point native formatting command.",
+      "html": "<button class=\"ds-format-control\">H₂</button>",
+      "css": ".ds-format-control { width: 44px; height: 44px; padding: 0; border: 0; border-radius: 12px; background: transparent; color: #000; font: 400 24px/1 -apple-system, sans-serif; } .ds-format-control:hover, .ds-format-control:focus-visible { background: rgba(118,118,128,.08); outline: none; }"
+    },
+    {
+      "name": "Selected Formatting Control",
+      "kind": "button",
+      "refersTo": "formatting-control-selected",
+      "description": "The active block style, marked by a quiet neutral fill.",
+      "html": "<button class=\"ds-format-control-selected\">H₁</button>",
+      "css": ".ds-format-control-selected { width: 44px; height: 44px; padding: 0; border: 0; border-radius: 12px; background: rgba(118,118,128,.12); color: #000; font: 400 24px/1 -apple-system, sans-serif; } .ds-format-control-selected:focus-visible { outline: 2px solid #007aff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Open Task Item",
+      "kind": "custom",
+      "refersTo": "task-checkbox",
+      "description": "An open task with a compact box inside a full touch target.",
+      "html": "<label class=\"ds-task\"><input type=\"checkbox\"><span>待办事项</span></label>",
+      "css": ".ds-task { display: flex; min-height: 44px; align-items: center; gap: 8px; color: #000; font: 400 16px/1.56 \"PingFang SC\", sans-serif; } .ds-task input { width: 20px; height: 20px; margin: 0 12px; border: 2px solid rgba(0,0,0,.09); border-radius: 6px; appearance: none; background: #fff; } .ds-task input:focus-visible { outline: 2px solid #007aff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Completed Task Item",
+      "kind": "custom",
+      "refersTo": "task-checkbox-checked",
+      "description": "A completed task with green confirmation and receding copy.",
+      "html": "<label class=\"ds-task-complete\"><span class=\"ds-task-check\"><svg viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M4.5 10.3 8.2 14 15.7 6.2\"/></svg></span><span>已完成事项</span></label>",
+      "css": ".ds-task-complete { display: flex; min-height: 44px; align-items: center; gap: 20px; color: rgba(60,60,67,.60); font: 400 16px/1.56 \"PingFang SC\", sans-serif; text-decoration: line-through; } .ds-task-check { display: grid; width: 20px; height: 20px; margin-left: 12px; place-items: center; border-radius: 6px; background: #01bc4a; text-decoration: none; } .ds-task-check svg { width: 14px; height: 14px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }"
+    },
+    {
+      "name": "Quote Context",
+      "kind": "custom",
+      "description": "Metadata or quoted context structured by a quiet rule rather than a card.",
+      "html": "<blockquote class=\"ds-quote\"><strong>主题:</strong> 云同步与 AI 功能逻辑评审</blockquote>",
+      "css": ".ds-quote { margin: 4px 0; padding: 0 0 0 18px; border-left: 2px solid rgba(115,121,140,.40); color: rgba(60,60,67,.60); font: 400 16px/1.56 \"PingFang SC\", sans-serif; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Continuous Note Canvas",
+    "overview": "The document is the interface. Reading and editing occupy the same calm white canvas, with native controls appearing only when they are useful. Hierarchy comes from Chinese-first typography, compact vertical rhythm, and restrained semantic decoration rather than cards or extra chrome. The visual identity is editorial but not ornamental: ink remains dominant, secondary metadata recedes, and the only persistent color moments are the heading wash, system link blue, and task-completion green. Native iOS materials belong to controls; the note body remains flat and direct.",
+    "keyCharacteristics": [
+      "One uninterrupted document surface for reading and editing.",
+      "Strong heading scale with more space above than below.",
+      "Sparse semantic color: lavender hierarchy, blue links, and green completion.",
+      "Native, compact controls with 44-point interaction targets.",
+      "Chinese typography, Dynamic Type, light/dark appearance, and reduced motion are first-class."
+    ],
+    "rules": [
+      {
+        "name": "The Sparse Accent Rule",
+        "body": "Color communicates hierarchy, action, or completion; it never becomes general decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Full-Contrast Reading Rule",
+        "body": "Read-only content keeps the same foreground contrast as editable content.",
+        "section": "colors"
+      },
+      {
+        "name": "The Content-First Type Rule",
+        "body": "Weight and size establish hierarchy before color or container treatment.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Document Rule",
+        "body": "Notes use spacing and type for structure; custom shadows and stacked surfaces stay out of the reading flow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep reading and editing on the same rendered canvas.",
+      "Do preserve more space above a heading than below it.",
+      "Do reserve 44-point hit targets even when the visible glyph is smaller.",
+      "Do keep task state in exported Markdown and use lowercase [x] for completed items.",
+      "Do apply Dynamic Type, dark appearance, and Reduce Motion through native traits."
+    ],
+    "donts": [
+      "Don't introduce a raw-source editor as a parallel visual mode.",
+      "Don't dim the whole note to communicate read-only state.",
+      "Don't add cards, decorative shadows, or extra toolbar commands to the core surface.",
+      "Don't use accent color where weight, spacing, or hierarchy already communicates the distinction.",
+      "Don't rely on CDN assets or browser-local storage for document state."
+    ]
+  }
+}

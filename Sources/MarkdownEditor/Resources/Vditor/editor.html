@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="dist/index.css">
+    <link rel="stylesheet" href="editor.css">
+    <title>Markdown Editor</title>
+</head>
+<body>
+<!--
+THESIS: Reading and editing are one continuous document; the separate raw-source editor is deliberately absent.
+OWN-WORLD: System surfaces, restrained controls, the existing Earbuds type scale, gradient heading marks, and green task state.
+STORY: A note renders immediately, becomes directly editable, and returns canonical Markdown without visual mode drift.
+FIRST VIEWPORT: The document owns the canvas edge to edge; formatting appears only above the keyboard while text has focus.
+FORM: Established-reader extension in Operate/Read mode; seed established-reader-extension.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+<main id="editor-shell">
+    <div id="editor" aria-label="Markdown 笔记"></div>
+</main>
+<script src="dist/index.min.js"></script>
+<script src="dist/js/i18n/zh_CN.js"></script>
+<script id="vditorLuteScript" src="dist/js/lute/lute.min.js"></script>
+<script src="dist/js/icons/ant.js"></script>
+<script src="bridge.js"></script>
+</body>
+</html>
