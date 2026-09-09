@@ -79,6 +79,31 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* A native host can own scrolling for the whole note, including its mind map.
+   Override Vditor's inline viewport height and remove its nested scroll layer. */
+:root.md-embedded,
+.md-embedded body,
+.md-embedded #editor-shell,
+.md-embedded #editor,
+.md-embedded .vditor-content,
+.md-embedded .vditor-wysiwyg {
+    height: auto !important;
+    min-height: 0;
+    overflow: visible;
+}
+
+.md-embedded .vditor-wysiwyg {
+    -webkit-overflow-scrolling: auto;
+    overscroll-behavior: auto;
+}
+
+.md-embedded .vditor-wysiwyg pre.vditor-reset {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    --editor-bottom: 0px !important;
+}
+
 .md-read-only .vditor-reset {
     caret-color: transparent;
     user-select: text;

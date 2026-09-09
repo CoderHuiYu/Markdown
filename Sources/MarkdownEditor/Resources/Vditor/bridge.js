@@ -5,11 +5,15 @@
         editor: null,
         ready: false,
         editable: false,
+        scrollEnabled: true,
         allowReadOnlyTasks: true,
         suppressChange: true,
         savedRange: null,
         changeTimer: null,
         selectionTimer: null,
+        heightFrame: null,
+        lastReportedHeight: null,
+        decorationFrame: null,
         resizeObserver: null,
         mutationObserver: null
     };
@@ -130,16 +134,24 @@
     }
 
     function reportHeight() {
-        window.requestAnimationFrame(function () {
+        if (state.heightFrame !== null) {
+            return;
+        }
+        state.heightFrame = window.requestAnimationFrame(function () {
+            state.heightFrame = null;
             var element = editorElement();
             if (!element) {
                 return;
             }
-            var value = Math.max(
-                element.scrollHeight,
-                document.documentElement.scrollHeight,
-                document.body.scrollHeight
-            );
+            // In embedded mode the document must be independent of the native
+            // viewport height, otherwise the host can grow but never shrink.
+            var value = Math.ceil(state.scrollEnabled
+                ? Math.max(element.scrollHeight, element.getBoundingClientRect().height)
+                : element.getBoundingClientRect().height);
+            if (!Number.isFinite(value) || value <= 0 || value === state.lastReportedHeight) {
+                return;
+            }
+            state.lastReportedHeight = value;
             post("height", {value: value});
         });
     }
@@ -242,8 +254,8 @@
             return;
         }
 
-        element.querySelectorAll("ul.md-task-list").forEach(function (list) {
-            list.classList.remove("md-task-list");
+        element.querySelectorAll("ul").forEach(function (list) {
+            list.classList.toggle("md-task-list", Boolean(list.querySelector(":scope > li.vditor-task")));
         });
 
         element.querySelectorAll('code[data-type="html-inline"]').forEach(function (item) {
@@ -254,9 +266,17 @@
         element.querySelectorAll("li.vditor-task").forEach(function (item) {
             var checkbox = item.querySelector(':scope > input[type="checkbox"]');
             item.classList.toggle("md-task-checked", Boolean(checkbox && checkbox.checked));
-            if (item.parentElement && item.parentElement.tagName === "UL") {
-                item.parentElement.classList.add("md-task-list");
-            }
+        });
+    }
+
+    function scheduleDocumentDecorations() {
+        if (state.decorationFrame !== null) {
+            return;
+        }
+        state.decorationFrame = window.requestAnimationFrame(function () {
+            state.decorationFrame = null;
+            syncDocumentDecorations();
+            reportHeight();
         });
     }
 
@@ -296,6 +316,13 @@
         if (element) {
             element.setAttribute("aria-readonly", state.editable ? "false" : "true");
         }
+        return true;
+    }
+
+    function setScrollEnabled(enabled) {
+        state.scrollEnabled = Boolean(enabled);
+        document.documentElement.classList.toggle("md-embedded", !state.scrollEnabled);
+        reportHeight();
         return true;
     }
 
@@ -354,6 +381,7 @@
     function setFormattingBarInset(inset) {
         var value = Math.max(0, Number(inset) || 0);
         document.documentElement.style.setProperty("--md-formatting-inset", value + "px");
+        reportHeight();
         return true;
     }
 
@@ -390,10 +418,7 @@
         state.resizeObserver = new ResizeObserver(reportHeight);
         state.resizeObserver.observe(element);
 
-        state.mutationObserver = new MutationObserver(function () {
-            syncDocumentDecorations();
-            reportHeight();
-        });
+        state.mutationObserver = new MutationObserver(scheduleDocumentDecorations);
         state.mutationObserver.observe(element, {
             subtree: true,
             childList: true,
@@ -461,7 +486,7 @@
                     state.ready = true;
                     state.suppressChange = false;
                     bindDocumentEvents();
-            syncDocumentDecorations();
+                    syncDocumentDecorations();
                     reportHeight();
                     post("ready");
                 }
@@ -484,6 +509,7 @@
             return state.ready ? canonicalizeMarkdown(state.editor.getValue()) : "";
         },
         setEditable: setEditable,
+        setScrollEnabled: setScrollEnabled,
         setPlaceholder: setPlaceholder,
         setTheme: setTheme,
         setFormattingBarInset: setFormattingBarInset,

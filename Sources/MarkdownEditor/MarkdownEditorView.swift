@@ -28,9 +28,18 @@ public final class MarkdownEditorView: UIView {
         }
     }
 
+    /// Disable when an outer scroll view owns vertical scrolling. This also
+    /// removes the HTML scroll container and measures the document intrinsically.
     public var isScrollEnabled: Bool {
         get { webView.scrollView.isScrollEnabled }
-        set { webView.scrollView.isScrollEnabled = newValue }
+        set {
+            guard newValue != webView.scrollView.isScrollEnabled else { return }
+            webView.scrollView.isScrollEnabled = newValue
+            webView.scrollView.alwaysBounceVertical = newValue
+            webView.scrollView.bounces = newValue
+            applyScrolling()
+            invalidateIntrinsicContentSize()
+        }
     }
 
     private let configuration: MarkdownEditorConfiguration
@@ -268,6 +277,7 @@ public final class MarkdownEditorView: UIView {
     }
 
     private func configureReadyEditor() {
+        applyScrolling()
         applyTheme()
         applyPlaceholder()
         applyEditability()
@@ -304,6 +314,18 @@ public final class MarkdownEditorView: UIView {
         executeJavaScript(
             "window.MarkdownBridge.setPlaceholder(placeholder);",
             arguments: ["placeholder": configuration.placeholder]
+        ) { result in
+            if case .failure(let error) = result {
+                self.report(error)
+            }
+        }
+    }
+
+    private func applyScrolling() {
+        guard isReady else { return }
+        executeJavaScript(
+            "window.MarkdownBridge.setScrollEnabled(enabled);",
+            arguments: ["enabled": isScrollEnabled]
         ) { result in
             if case .failure(let error) = result {
                 self.report(error)
@@ -486,7 +508,8 @@ extension MarkdownEditorView: WKScriptMessageHandler {
 
         case "height":
             guard let number = payload["value"] as? NSNumber else { return }
-            let height = CGFloat(number.doubleValue)
+            let height = ceil(CGFloat(number.doubleValue))
+            guard height.isFinite, height > 0 else { return }
             guard abs(height - contentHeight) > 0.5 else { return }
             contentHeight = height
             invalidateIntrinsicContentSize()
